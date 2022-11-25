@@ -8,6 +8,6 @@
 # |   |   |   |   |
 # *   *   *   *   *  command to be executed
 
-0   3   *   *   1  /home/letsencrypt/cron.sh > /etc/letsencrypt/log/cron.log 2>&1
+0   3   *   *   *  /home/letsencrypt/cron.sh > /etc/letsencrypt/log/cron.log 2>&1
 
 # An empty line is required at the end of this file for a valid cron file.
