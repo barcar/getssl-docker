@@ -14,6 +14,7 @@ RUN apt update && \
     chmod g+s /etc/letsencrypt && \
     mkdir /etc/letsencrypt/certs && \
     mkdir /etc/letsencrypt/private && \
+    mkdir /etc/letsencrypt/logs && \
     mkdir /home/letsencrypt
     
 #USER letsencrypt
