@@ -1,25 +1,38 @@
 FROM debian:stable-slim
 
-WORKDIR /opt/runzero
+#WORKDIR /opt/runzero
 
 RUN set -ex
 
 RUN apt update && \
-    apt install -y git openssl curl && \
-    addgroup letsencrypt && \
-    adduser letsencrypt letsencrypt && \
+    apt install -y git openssl curl dnsutils cron rsyslog nano procps && \
+#    addgroup letsencrypt && \
+#    useradd letsencrypt -g letsencrypt && \
     mkdir /etc/letsencrypt && \
-    chown letsencrypt:letsencrypt /etc/letsencrypt && \
+#    chown letsencrypt:letsencrypt /etc/letsencrypt && \
     chmod 770 /etc/letsencrypt && \
     chmod g+s /etc/letsencrypt && \
     mkdir /etc/letsencrypt/certs && \
-    mkdir /etc/letsencrypt/private
+    mkdir /etc/letsencrypt/private && \
+    mkdir /home/letsencrypt
     
-USER letsencrypt
+#USER letsencrypt
+WORKDIR /home/letsencrypt
 
-RUN git clone https://github.com/srvrco/getssl.git && \
-	  curl https://raw.githubusercontent.com/dominictarr/JSON.sh/master/JSON.sh > "/home/letsencrypt/getssl/dns_scripts/JSON.sh" && \
-    chmod 700 "/home/letsencrypt/getssl/dns_scripts/JSON.sh"
+COPY setup.sh ./
+COPY crontab ./
+COPY cron.sh ./
 
-CMD tail -f /dev/null
+RUN id && \
+    pwd && \
+    ls -la && \
+    git clone https://github.com/srvrco/getssl.git && \
+    curl https://raw.githubusercontent.com/dominictarr/JSON.sh/master/JSON.sh > "./getssl/dns_scripts/JSON.sh" && \
+    chmod 700 "./getssl/dns_scripts/JSON.sh" && \
+    ls -la && \
+    chmod +x ./*.sh && \
+    crontab ./crontab && \
+    crontab -l && \
+    ls -la
 
+ENTRYPOINT ["cron", "-f"]

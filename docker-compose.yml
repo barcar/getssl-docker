@@ -9,8 +9,13 @@ services:
     tty: true
     environment:
       - TZ=Europe/London
-#    volumes:
-#      - nodered_data:/data:rw
+      - EMAIL=${EMAIL}
+      - DOMAIN=${DOMAIN}
+      - SANS=${SANS}
+      - GODADDY_KEY=${GODADDY_KEY}
+      - GODADDY_SECRET=${GODADDY_SECRET}
+    volumes:
+      - getssl_data:/etc/letsencrypt:rw
 #    healthcheck:
 #      test: netstat -an | grep 1880; if [ 0 != $$? ]; then exit 1; fi;
 ##      test: ["CMD", "curl", "-f", "http://localhost:1880"]
@@ -20,6 +25,6 @@ services:
 #      start_period: 40s
 #   labels:
 #      - "com.centurylinklabs.watchtower.enable=true"
-#volumes:
-#  nodered_data:
-#    external: true
+volumes:
+  getssl_data:
+    external: true
