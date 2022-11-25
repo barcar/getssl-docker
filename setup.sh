@@ -70,6 +70,8 @@ if [ "$STAGING_OK" = "TRUE" ]; then
     # get certificates
     echo "$(tput setaf 3)Getting certificates from production$(tput setaf 6)"
     ./getssl/getssl -f -w "$MY_WORKDIR" "$MY_DOMAIN"
+    
+    mkdir $MY_WORKDIR\log
 
 fi
 
