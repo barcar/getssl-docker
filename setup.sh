@@ -65,7 +65,7 @@ if [ "$STAGING_OK" = "TRUE" ]; then
     sed -i "s~#DOMAIN_KEY_LOCATION=\"/etc/ssl/$MY_DOMAIN.key\"~DOMAIN_KEY_LOCATION=\"/etc/letsencrypt/private/$MY_DOMAIN.key\"~" $MY_DOMAIN_FILE
     sed -i "s~#DOMAIN_CERT_LOCATION=\"/etc/ssl/$MY_DOMAIN.crt\"~DOMAIN_CERT_LOCATION=\"/etc/letsencrypt/certs/$MY_DOMAIN.crt\"~" $MY_DOMAIN_FILE
 
-    sed -i 's~#CA="https://acme-v02.api.letsencrypt.org"~##CA="https://acme-v02.api.letsencrypt.org"~' $MY_DOMAIN_FILE
+    sed -i 's~#CA="https://acme-v02.api.letsencrypt.org"~CA="https://acme-v02.api.letsencrypt.org"~' $MY_DOMAIN_FILE
 
     # get certificates
     echo "$(tput setaf 3)Getting certificates from production$(tput setaf 6)"
