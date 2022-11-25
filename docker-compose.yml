@@ -9,11 +9,11 @@ services:
     tty: true
     environment:
       - TZ=Europe/London
-      - EMAIL=${EMAIL}
-      - DOMAIN=${DOMAIN}
-      - SANS=${SANS}
-      - GODADDY_KEY=${GODADDY_KEY}
-      - GODADDY_SECRET=${GODADDY_SECRET}
+      - MY_EMAIL=${MY_EMAIL}
+      - MY_DOMAIN=${MY_DOMAIN}
+      - MY_SANS=${MY_SANS}
+      - MY_GODADDY_KEY=${MY_GODADDY_KEY}
+      - MY_GODADDY_SECRET=${MY_GODADDY_SECRET}
     volumes:
       - getssl_data:/etc/letsencrypt:rw
 #    healthcheck:
