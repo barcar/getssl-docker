@@ -4,7 +4,7 @@ echo "Starting getssl  setup..."
 export MY_HOMEDIR=/home/letsencrypt/getssl
 export MY_WORKDIR=/etc/letsencrypt/getssl
 export MY_CONFIG_FILE=$MY_WORKDIR/getssl.cfg
-export MY_DOMAIN_FILE=$MY_WORKDIR/$DOMAIN/getssl.cfg
+export MY_DOMAIN_FILE=$MY_WORKDIR/$MY_DOMAIN/getssl.cfg
 
 env
 
