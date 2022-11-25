@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "Starting renewal..."
-mkdir /etc/letsencrypt/log
 date
 pwd
 id
