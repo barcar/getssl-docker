@@ -5,7 +5,7 @@ FROM debian:stable-slim
 RUN set -ex
 
 RUN apt update && \
-    apt install -y git openssl curl dnsutils cron rsyslog nano procps && \
+    apt install -y git openssl curl dnsutils cron rsyslog nano procps ssmtp && \
 #    addgroup letsencrypt && \
 #    useradd letsencrypt -g letsencrypt && \
     mkdir /etc/letsencrypt && \
@@ -23,6 +23,7 @@ WORKDIR /home/letsencrypt
 COPY setup.sh ./
 COPY crontab ./
 COPY cron.sh ./
+ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 RUN id && \
     pwd && \
@@ -34,6 +35,8 @@ RUN id && \
     chmod +x ./*.sh && \
     crontab ./crontab && \
     crontab -l && \
-    ls -la
+    ls -la && \
+    chown root.mail /etc/ssmtp/ssmtp.conf && \
+    chmod 0640 /etc/ssmtp/ssmtp.conf
 
 ENTRYPOINT ["cron", "-f"]
