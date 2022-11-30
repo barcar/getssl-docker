@@ -23,7 +23,6 @@ WORKDIR /home/letsencrypt
 COPY setup.sh ./
 COPY crontab ./
 COPY cron.sh ./
-COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 RUN id && \
     pwd && \
@@ -31,12 +30,8 @@ RUN id && \
     git clone https://github.com/srvrco/getssl.git && \
     curl https://raw.githubusercontent.com/dominictarr/JSON.sh/master/JSON.sh > "./getssl/dns_scripts/JSON.sh" && \
     chmod 700 "./getssl/dns_scripts/JSON.sh" && \
-    ls -la && \
     chmod +x ./*.sh && \
     crontab ./crontab && \
-    crontab -l && \
-    ls -la && \
-    chown root.mail /etc/ssmtp/ssmtp.conf && \
-    chmod 0640 /etc/ssmtp/ssmtp.conf
+    crontab -l
 
 ENTRYPOINT ["cron", "-f"]
