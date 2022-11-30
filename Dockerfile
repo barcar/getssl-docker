@@ -23,7 +23,7 @@ WORKDIR /home/letsencrypt
 COPY setup.sh ./
 COPY crontab ./
 COPY cron.sh ./
-ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
+COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 RUN id && \
     pwd && \
