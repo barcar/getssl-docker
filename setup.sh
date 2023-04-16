@@ -61,9 +61,9 @@ if [ "$STAGING_OK" = "TRUE" ]; then
 
     echo "$(tput setaf 3)Editing domain configuration file$(tput setaf 7)"
 
-    sed -i "s~#DOMAIN_PEM_LOCATION=\"\"~DOMAIN_PEM_LOCATION=\"/etc/letsencrypt/private/$MY_DOMAIN\"~" $MY_DOMAIN_FILE
-    sed -i "s~#DOMAIN_KEY_LOCATION=\"/etc/ssl/$MY_DOMAIN.key\"~DOMAIN_KEY_LOCATION=\"/etc/letsencrypt/private/$MY_DOMAIN.key\"~" $MY_DOMAIN_FILE
-    sed -i "s~#DOMAIN_CERT_LOCATION=\"/etc/ssl/$MY_DOMAIN.crt\"~DOMAIN_CERT_LOCATION=\"/etc/letsencrypt/certs/$MY_DOMAIN.crt\"~" $MY_DOMAIN_FILE
+    sed -i "s~#DOMAIN_PEM_LOCATION=\"\"~DOMAIN_PEM_LOCATION=\"/etc/letsencrypt/private/$MY_DOMAIN;/mnt/host_etc/letsencrypt/private/$MY_DOMAIN\"~" $MY_DOMAIN_FILE
+    sed -i "s~#DOMAIN_KEY_LOCATION=\"/etc/ssl/$MY_DOMAIN.key\"~DOMAIN_KEY_LOCATION=\"/etc/letsencrypt/private/$MY_DOMAIN.key;/mnt/host_etc/letsencrypt/private/$MY_DOMAIN.key\"~" $MY_DOMAIN_FILE
+    sed -i "s~#DOMAIN_CERT_LOCATION=\"/etc/ssl/$MY_DOMAIN.crt\"~DOMAIN_CERT_LOCATION=\"/etc/letsencrypt/certs/$MY_DOMAIN.crt;/mnt/host_etc/letsencrypt/certs/$MY_DOMAIN.crt\"~" $MY_DOMAIN_FILE
 
     sed -i 's~#CA="https://acme-v02.api.letsencrypt.org"~CA="https://acme-v02.api.letsencrypt.org"~' $MY_DOMAIN_FILE
 
