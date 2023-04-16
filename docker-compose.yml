@@ -17,6 +17,7 @@ services:
       - MY_GODADDY_SECRET=${MY_GODADDY_SECRET}
     volumes:
       - getssl_data:/etc/letsencrypt:rw
+      - /etc:/mnt/host_etc:rw
       - ssmtp_data:/etc/ssmtp:ro
 #    healthcheck:
 #      test: netstat -an | grep 1880; if [ 0 != $$? ]; then exit 1; fi;
